@@ -1,6 +1,9 @@
 class ItemsController < ApplicationController
   before_action :move_to_user_new, only: :new
   def index
+    @items = Item.order('created_at DESC')
+
+    @item_exists = @items.present?
   end
 
   def new
