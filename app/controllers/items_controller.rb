@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
   before_action :move_to_user_new, only: :new
   def index
-    @item = Item.all.order('created_at DESC')
+    @items = Item.all.order('created_at DESC')
 
-    @item_exists = @item.present?
+    @item_exists = @items.present?
   end
 
   def new
