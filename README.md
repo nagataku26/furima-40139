@@ -14,7 +14,7 @@
 ## Association
 
 - has_many :items
-- has_many :purchased_products
+- has_many :orders
 
 ## itemsテーブル
 
@@ -33,9 +33,9 @@
 ## Association
 
 - belongs_to :user
-- has_one :purchased_product
+- has_one :order
 
-## purchased_productsテーブル
+## ordersテーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
@@ -58,8 +58,8 @@
 | block             | string     | null: false                    |
 | building_name     | string     |                                |
 | phone_number      | string     | null: false                    |
-| purchased_product | references | null: false, foreign_key: true |
+| order | references | null: false, foreign_key: true |
 
 ## Association
 
-- belongs_to :purchased_product
+- belongs_to :order
