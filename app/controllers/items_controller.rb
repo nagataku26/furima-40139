@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :destroy]
   before_action :move_to_user_new, only: :new
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   def index
     @items = Item.order('created_at DESC')
-
     @item_exists = @items.present?
   end
 
@@ -24,8 +24,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to user_signed_in? ? root_path : new_user_session_path
+    unless current_user.id == @item.user_id && !@item.purchased?
+      redirect_to root_path
     end
   end
 
@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy if user_signed_in? && current_user.id == @item.user_id
+    @item.destroy if current_user.id == @item.user_id
     redirect_to root_path
   end
 
