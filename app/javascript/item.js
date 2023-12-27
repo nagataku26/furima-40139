@@ -4,11 +4,19 @@ function item(){
   const profitElement = document.getElementById("profit");
 
   priceInput.addEventListener("input",() =>{
-    const inputValue = priceInput.value;
+    const inputValue = parseFloat(priceInput.value);
 
-    taxAmountElement.innerHTML = Math.floor(inputValue * 0.1);
+    if (isNaN(inputValue)) {
+      taxAmountElement.innerHTML = "";
+      profitElement.innerHTML = "";
+      return;
+    }
 
-    profitElement.innerHTML = Math.floor(inputValue * 0.9);
+    const taxAmount = Math.floor(inputValue * 0.1);
+    taxAmountElement.innerHTML = taxAmount;
+
+    const profitAmount = Math.floor(inputValue - taxAmount);
+    profitElement.innerHTML = profitAmount;
 
   });
 
@@ -19,3 +27,4 @@ function item(){
 };
 
 window.addEventListener('turbo:load', item);
+window.addEventListener("turbo:render", item);
