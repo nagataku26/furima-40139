@@ -5,10 +5,9 @@ class OrdersController < ApplicationController
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_address = OrderAddress.new
-    redirect_to root_path if @item.purchased?
-    return unless current_user.id == @item.user_id
-
-    redirect_to root_path
+    if @item.purchased? || current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
   def create
