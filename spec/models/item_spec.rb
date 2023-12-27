@@ -63,7 +63,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it '発送元の地域に「---」が選択されている場合は出品できない' do
-        @item.prefecture_id = ''
+        @item.prefecture_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -73,7 +73,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Days delivery can't be blank")
       end
       it '発送までの日数に「---」が選択されている場合は出品できない' do
-        @item.days_delivery_id = ''
+        @item.days_delivery_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Days delivery can't be blank")
       end
